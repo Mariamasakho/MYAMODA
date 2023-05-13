@@ -1,0 +1,67 @@
+<%- include('header'); -%>
+<body>
+  <div class="container-scroller">
+    <%- include('nav'); -%>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <%- include('sidebar'); -%>
+      <div class="col-xl-8 m-5">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Product lists</h4>
+            <a href="/admin/addProduct" class="btn btn-primary">
+              Create product
+            </a>
+
+            <% if(products.length > 0 ) {%>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Created Date</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (let prod of products) { %>
+                  <tr>
+                    <td class="">
+                      <img src="<%= prod.image %>" alt="image" />
+                    </td>
+                    <td><%= prod.name %></td>
+                    <td>$ <%= prod.price %></td>
+                    <td><%= prod.category %></td>
+                    <td><%= new Date(prod.createdAt).toLocaleString() %></td>
+                    <td>
+                      <a
+                        type="button"
+                        href="/admin/editproduct/<%= prod.id %>"
+                        class="btn btn-success"
+                      >
+                        Edit
+                      </a>
+                      <a type="button" href="/admin/removeProduct/<%= prod.id %>" class="btn btn-danger">
+                        Remove
+                      </a>
+                    </td>
+                  </tr>
+
+                  <% }%>
+                </tbody>
+              </table>
+            </div>
+
+            <% }%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+</body>
+
+<%- include('footer'); -%>

@@ -1,0 +1,64 @@
+<%- include('header'); -%>
+<body>
+  <div class="container-scroller">
+    <%- include('nav'); -%>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <%- include('sidebar'); -%>
+      <div class="col-xl-10 m-5">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Product Orders</h4>
+            <% if(orders.length > 0 ) {%>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Username</th>
+                    <th>Contact No</th>
+                    <th>Country</th>
+                    <th>State</th>
+                    <th>Payment Mode</th>
+                    <th>Order Date</th>
+
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (let item of orders) { %>
+                  <tr>
+                    <td><%= item.productName %></td>
+                    <td>$<%= item.price %></td>
+                    <td><%= item.quantity %></td>
+                    <td><%= item.userName %></td>
+                    <td><%= item.phone %></td>
+                    <td><%= item.country %></td>
+                    <td><%= item.state %></td>
+                    <td><%= item.payment %></td>
+                    <td><%= new Date(item.createdAt).toLocaleString() %></td>
+                    <td><%= item.type %></td>
+                    <td>
+                      <% if (item.type === 'ordered') {%> <a type="button" href="/admin/orderStatus/<%= item.id %>" class="btn btn-success">
+                        Delivered
+                      </a><%}%>
+                    </td>
+                  </tr>
+
+                  <% }%>
+                </tbody>
+              </table>
+            </div>
+
+            <% }%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+</body>
+
+<%- include('footer'); -%>

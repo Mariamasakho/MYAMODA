@@ -1,0 +1,52 @@
+<%- include('header'); -%>
+<body>
+  <div class="container-scroller">
+    <%- include('nav'); -%>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <%- include('sidebar'); -%>
+      <div class="col-xl-8 m-5">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Approve Customers</h4>
+            <% if(customers.length > 0 ) {%>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Username</th>
+                    <th>Created Date</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (let item of customers) { %>
+                  <tr>
+                    <td><%= item.fname %></td>
+                    <td> <%= item.lname %></td>
+                    <td><%= item.username %></td>
+                    <td><%= new Date(item.createdAt).toLocaleString() %></td>
+                    <td>
+                      <a type="button" href="/admin/customer/?id=<%= item.id %>" class="btn btn-success">
+                        Approve
+                      </a>
+                    </td>
+                  </tr>
+
+                  <% }%>
+                </tbody>
+              </table>
+            </div>
+
+            <% }%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+</body>
+
+<%- include('footer'); -%>

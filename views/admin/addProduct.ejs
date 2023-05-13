@@ -1,0 +1,89 @@
+<%- include('header'); -%>
+<body>
+  <div class="container-scroller">
+    <%- include('nav'); -%>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <%- include('sidebar'); -%>
+      <div class="col-xl-4 m-5">
+        <div class="card">
+          <div class="card-body">
+            <% if (error) { %>
+            <div class="alert alert-danger" role="alert"><%= error %></div>
+            <% } %>
+            <h4 class="card-title"> <% if (product) { %>Edit<% } else { %>Create<% } %> Product</h4>
+            <p class="card-description">Fill product details</p>
+            <form
+              class="forms-sample"
+              action="/admin/addProduct"
+              method="POST"
+              enctype="multipart/form-data"
+            >
+              <input type="hidden" name="productId" value="<% if (product) { %><%= product.id %><% }%>" />
+              <div class="form-group">
+                <label for="exampleInputUsername1">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleInputUsername1"
+                  placeholder=""
+                  name="name"
+                  value="<% if (product) { %><%= product.name %><% }%>"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInput1">Price</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="exampleInput1"
+                  placeholder=""
+                  name="price"
+                  value="<% if (product) { %><%= product.price %><% }%>"
+
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInput1">Image</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="exampleInput1"
+                  placeholder=""
+                  value="<% if (product) { %><%= product.image %><% }%>"
+
+                  name="image"
+                  
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleSelectGender">Category</label>
+                <select
+                  class="form-control"
+                  required
+                  name="category"
+                  id="exampleSelectGender"
+                  value="<% if (product) { %><%= product.category %><% }%>"
+
+                >
+                  <option value="clothes">clothes</option>
+                  <option value="watches">watches</option>
+                  <option value="shoes">shoes</option>
+                  <option value="perfumes">perfumes</option>
+                  <option value="bags">bags</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary mr-2">Submit</button>
+              <a href="/admin/products" class="btn btn-light">Cancel</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+</body>
+
+<%- include('footer'); -%>
